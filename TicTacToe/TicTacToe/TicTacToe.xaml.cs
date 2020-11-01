@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -52,7 +51,7 @@ namespace TicTacToe
 
             man = new Button
             {
-                Text = "Выбор игрока"
+                Text = "Выбор знака"
             };
             man.Clicked += Man_Clicked;
             grid.Children.Add(man, 2, 3);
@@ -63,11 +62,11 @@ namespace TicTacToe
                 {
                     lbl = new Label
                     {
-                        BackgroundColor = Color.Gray,
-                        FontSize = 30,
+                        BackgroundColor = Color.FromRgb(123, 184, 146),
+                        FontSize = 100,
                         Text = "",
                         HorizontalTextAlignment = TextAlignment.Center,
-                        TextColor = Color.Green,
+                        TextColor = Color.FromRgb(0, 255, 96),
                         VerticalTextAlignment = TextAlignment.Center,
                     };
                     tic[i, j] = lbl;
@@ -132,6 +131,147 @@ namespace TicTacToe
                     stps++;
                     label.Text = "0";
                 }
+            if (check() == true)
+            {
+                DisplayAlert("Игра окончена!", "Ничья", "Новая игра");
+                Grid();
+                stps = 0;
+            }
+
+            else if (checkY() == true)
+            {
+                DisplayAlert("Игра окончена!", win, "Новая игра");
+                Grid();
+            }
+            else if (checkX() == true)
+            {
+                DisplayAlert("Игра окончена!", win, "Новая игра");
+                Grid();
+            }
+            else if (checkXY() == true)
+            {
+                DisplayAlert("Игра окончена!", win, "Новая игра");
+                Grid();
+            }
+        }
+        bool check() //Ничья
+        {
+            if (stps == 9)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        string win = "";
+        bool checkY() //Победа по вертикали
+        {
+
+            if (tic[0, 0].Text == "X" && tic[0, 1].Text == "X" && tic[0, 2].Text == "X")
+            {
+                win = "Победил X";
+                return true; 
+            }
+
+            else if (tic[1, 0].Text == "X" && tic[1, 1].Text == "X" && tic[1, 2].Text == "X")
+            {
+                win = "Победил X";
+                return true;
+            }
+
+            else if (tic[2, 0].Text == "X" && tic[2, 1].Text == "X" && tic[2, 2].Text == "X")
+            {
+                win = "Победил X";
+                return true;
+            }
+
+            else if (tic[0, 0].Text == "0" && tic[0, 1].Text == "0" && tic[0, 2].Text == "0")
+            {
+                win = "Победил 0";
+                return true; 
+            }
+
+            else if (tic[1, 0].Text == "0" && tic[1, 1].Text == "0" && tic[1, 2].Text == "0")
+            {
+                win = "Победил 0";
+                return true;
+            }
+
+            else if (tic[2, 0].Text == "0" && tic[2, 1].Text == "X" && tic[2, 2].Text == "0")
+            {
+                win = "Победил 0";
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        bool checkX() //Победа по горизонтали
+        {
+            if (tic[0, 0].Text == "X" && tic[1, 0].Text == "X" && tic[2, 0].Text == "X")
+            {
+                win = "Победил X";
+                return true;
+            }
+            else if (tic[0, 1].Text == "X" && tic[1, 1].Text == "X" && tic[2, 1].Text == "X")
+            {
+                win = "Победил X";
+                return true;
+            }
+            else if (tic[0, 2].Text == "X" && tic[1, 2].Text == "X" && tic[2, 2].Text == "X")
+            {
+                win = "Победил X";
+                return true;
+            }
+            else if (tic[0, 0].Text == "0" && tic[1, 0].Text == "0" && tic[2, 0].Text == "0")
+            {
+                win = "Победил 0";
+                return true;
+            }
+            else if (tic[0, 1].Text == "0" && tic[1, 1].Text == "0" && tic[2, 1].Text == "0")
+            {
+                win = "Победил 0";
+                return true;
+            }
+            else if (tic[0, 2].Text == "0" && tic[1, 2].Text == "0" && tic[2, 2].Text == "0")
+            {
+                win = "Победил 0";
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        bool checkXY() //Победа по диагонали
+        {
+            if (tic[0, 0].Text == "X" && tic[1, 1].Text == "X" && tic[2, 2].Text == "X")
+            {
+                win = "Победил X";
+                return true; ;
+            }
+            else if (tic[2, 0].Text == "X" && tic[1, 1].Text == "X" && tic[0, 2].Text == "X")
+            {
+                win = "Победил X";
+                return true;
+            }
+            else if (tic[0, 0].Text == "0" && tic[1, 1].Text == "0" && tic[2, 2].Text == "0")
+            {
+                win = "Победил 0";
+                return true; ;
+            }
+            else if (tic[2, 0].Text == "0" && tic[1, 1].Text == "0" && tic[0, 2].Text == "0")
+            {
+                win = "Победил 0";
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         int stps = 0;
         Random rnd = new Random();
@@ -147,6 +287,7 @@ namespace TicTacToe
             {
                 change.Text = "0";
             }
+
         }
     }
 }
